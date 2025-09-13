@@ -13,45 +13,34 @@ public class CreditCard extends Account {
     
     
     public CreditCard (double limiteCredito, double montoActual){
-    super(montoActual); //Si el saldo es negativo, significa que tiene a favor
+    super(montoActual); 
     this.limiteCredito = limiteCredito;
     }
     
-    //Método para sumar intereses solo si tiene dauda
+    //Método al depositar y pagar deuda
+  public void pagarDeuda() {
+    double cantidad = getMontoActual(); 
+    if (cantidad < 0) {
+        System.out.println("Deuda actual después de pagar: $" + Math.abs(cantidad));
+    } else if (cantidad > 0) {
+        System.out.println("Tienes un saldo a favor de: $" + cantidad);
+    } else {
+        System.out.println("Deuda saldada");
+    }
+}//pagarDeuda
+  
+     //Método para sumar intereses solo si tiene deuda
     public void sumaIntereses(int meses){
         double cantidad = getMontoActual();
-                if(cantidad >0) {
-                cantidad = cantidad * Math.pow(1 + 0.15, meses); //formula para sacar el interés compuesto
-                setMontoActual(cantidad);
+                if(cantidad <0) {
+                double deudaConIntereses = cantidad * Math.pow(1 + 0.15, meses);
+                setMontoActual(deudaConIntereses);
+                System.out.println("Deuda actual con intereses: $" + Math.abs(deudaConIntereses));
                 } 
     }//Método sumaIntereses
-    
-    
-    //Método para mostrar el saldo
-    public void mostrarSaldo(){
-        double cantidad = getMontoActual();
-    if (cantidad < 0){
-        System.out.println("Saldo a favor: $" + Math.abs(cantidad));
-    } else if (cantidad ==0){
-        System.out.println("Saldo en 0, no hay deuda ni saldo a favor");
-    }else {
-        System.out.println("Deuda: $" + cantidad);
-    }  
-    }//Método mostrarSaldo
-    
-    
-    //Método para "gastar" dinero de la tarjeta
-    public void gastar (double cantidad){
-    double nuevoSaldo = getMontoActual() + cantidad;
-    if (cantidad <= limiteCredito){
-    setMontoActual(nuevoSaldo);
-    }else{
-    System.out.println("No puedes gastar más del limite de crédito");
-    }
-    }// Método gastar
  
     //Getter limite de credito
-    public double getLimiteCredito(double par) {
+    public double getLimiteCredito() {
     return limiteCredito;
     }//getter LimiteCredito
 

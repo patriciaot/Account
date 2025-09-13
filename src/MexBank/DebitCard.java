@@ -14,11 +14,14 @@ public class DebitCard extends Account {
        super (montoActual);
    }
    
-   public void retirar(double cantidad){
+   public boolean retirar(double cantidad){
     if(cantidad <= getMontoActual()){
         setMontoActual(getMontoActual() - cantidad);
+        System.out.println("Retiro exitoso de: $"+ cantidad);
+        return true;
     } else{
-        System.out.println("saldo insuficiente");
+        System.out.println("saldo insuficiente para retirar");
+        return false;
     }
    } //Método retirar
    

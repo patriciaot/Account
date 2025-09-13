@@ -17,6 +17,7 @@ public class SavingsAccount extends Account {
     public void invertir(){
     double cantidad = getMontoActual() * (0.10);
         setMontoActual(getMontoActual()+cantidad);
+        System.out.println("Se invirtió con éxito. Ganancia: $" + cantidad);
    }
    
     
